@@ -3,7 +3,7 @@ Database rebuild and verification
 
 This folder contains two SQL files for Assignment 2:
 
-- `rebuild.sql` — creates the custom type, the `classification`, `inventory`, and `account` tables, inserts sample data, and runs the replacement and image-path updates from Task 1.
+- `rebuild.sql` — creates the custom type, the `classification`, `inventory`, and 0`account` tables, inserts sample data, and runs the replacement and image-path updates from Task 1.
 - `assignment2.sql` — contains the six Task 1 queries (insert Tony Stark, update to Admin, delete Tony, description replace for GM Hummer, select join for Sport classification, update image paths).
 
 Quick run (PowerShell with `psql` available):
