@@ -60,5 +60,9 @@ app.post('/inquiry', (req, res) => {
   res.render('index', { title: 'CSE Motors', success: 'Thanks! Your inquiry has been received.' });
 });
 
-// start
-app.listen(PORT, () => console.log(`Server listening on http://localhost:${PORT}`));
+// start server if not being required (for tests)
+if (!module.parent) {
+  app.listen(PORT, () => console.log(`Server listening on http://localhost:${PORT}`));
+}
+
+module.exports = app;
