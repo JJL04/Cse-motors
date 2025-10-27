@@ -48,6 +48,9 @@ try {
 }
 
 // routes
+// simple health check to verify the server is up without rendering templates
+app.get('/_health', (req, res) => res.status(200).send('OK'));
+
 app.get('/', (req, res) => {
   res.render('index', { title: 'CSE Motors' });
 });
@@ -82,3 +85,9 @@ if (!module.parent) {
 }
 
 module.exports = app;
+
+// error handler (will show stack in response for debugging -- remove or restrict in production)
+app.use((err, req, res, next) => {
+  console.error('Unhandled error:', err && err.stack ? err.stack : err);
+  res.status(500).send('<pre>' + (err && err.stack ? err.stack : String(err)) + '</pre>');
+});
