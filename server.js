@@ -32,6 +32,21 @@ function writeData(arr){
   fs.writeFileSync(DATA_FILE, JSON.stringify(arr, null, 2));
 }
 
+// Ensure data directory and file exist (helps in read-only or fresh deploy environments)
+try {
+  const dataDir = path.join(__dirname, 'data');
+  if (!fs.existsSync(dataDir)) {
+    fs.mkdirSync(dataDir, { recursive: true });
+    console.log('Created data directory');
+  }
+  if (!fs.existsSync(DATA_FILE)) {
+    fs.writeFileSync(DATA_FILE, JSON.stringify([]));
+    console.log('Created entries.json');
+  }
+} catch (err) {
+  console.error('Failed to ensure data files:', err);
+}
+
 // routes
 app.get('/', (req, res) => {
   res.render('index', { title: 'CSE Motors' });
@@ -54,6 +69,7 @@ app.post('/inquiry', (req, res) => {
     writeData(entries);
   }catch(e){
     console.error('Failed to write data', e);
+    // render an error page but include the error message in console for debugging
     return res.status(500).render('index', { title: 'CSE Motors', errors: ['Server error saving your inquiry'], form: { name, email, message } });
   }
 
