@@ -52,7 +52,8 @@ try {
 app.get('/_health', (req, res) => res.status(200).send('OK'));
 
 app.get('/', (req, res) => {
-  res.render('index', { title: 'CSE Motors' });
+  // provide default locals so EJS can safely reference them
+  res.render('index', { title: 'CSE Motors', form: {}, errors: null, success: null });
 });
 
 app.post('/inquiry', (req, res) => {
