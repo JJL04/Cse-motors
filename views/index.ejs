@@ -55,13 +55,13 @@
 
   <form action="/inquiry" method="post" novalidate>
     <label for="name">Name</label>
-    <input id="name" name="name" type="text" value="<%= form && form.name ? form.name : '' %>" required>
+  <input id="name" name="name" type="text" value="<%= (typeof form !== 'undefined' && form.name) ? form.name : '' %>" required>
 
     <label for="email">Email</label>
-    <input id="email" name="email" type="email" value="<%= form && form.email ? form.email : '' %>" required>
+  <input id="email" name="email" type="email" value="<%= (typeof form !== 'undefined' && form.email) ? form.email : '' %>" required>
 
     <label for="message">Message</label>
-    <textarea id="message" name="message" required><%= form && form.message ? form.message : '' %></textarea>
+  <textarea id="message" name="message" required><%= (typeof form !== 'undefined' && form.message) ? form.message : '' %></textarea>
 
     <button class="btn" type="submit">Send Inquiry</button>
   </form>
