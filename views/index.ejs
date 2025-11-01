@@ -7,34 +7,66 @@
     <% include partials/header %>
     <% include partials/nav %>
 
-    <main class="container">
+    <main>
+      <!-- HERO SECTION -->
       <section class="hero">
-        <img src="/images/hero.jpg" alt="CSE Motors showroom" />
-        <div class="hero-text">
-          <h2>Your dream car awaits</h2>
-          <p>Explore our selection of quality vehicles today!</p>
-          <a href="#" class="btn">View Inventory</a>
+        <div class="container hero-inner">
+          <div class="hero-text">
+            <h2>Your next adventure starts with CSE Motors</h2>
+            <p>Find quality vehicles, affordable prices, and financing options designed just for you.</p>
+            <a href="/inventory" class="btn">Browse Inventory</a>
+          </div>
+
+          <div class="hero-image">
+            <img src="/images/hero.jpg" alt="A car showroom representing CSE Motors" />
+          </div>
         </div>
       </section>
 
-      <section class="featured">
-        <h2>Featured Vehicles</h2>
-        <div class="grid">
-          <article>
-            <img src="/images/cars/car1.jpg" alt="Blue Sedan" />
-            <h3>2021 Sedan</h3>
-            <p>$19,995</p>
-          </article>
-          <article>
-            <img src="/images/cars/car2.jpg" alt="Red SUV" />
-            <h3>2020 SUV</h3>
-            <p>$24,495</p>
-          </article>
-          <article>
-            <img src="/images/cars/car3.jpg" alt="White Truck" />
-            <h3>2019 Truck</h3>
-            <p>$27,000</p>
-          </article>
+      <!-- FEATURED INVENTORY -->
+      <section class="inventory">
+        <div class="container">
+          <h2>Featured Vehicles</h2>
+          <div class="grid">
+            <article class="card">
+              <img src="/images/cars/car1.jpg" alt="Blue Sedan 2021" />
+              <h3>2021 Sedan</h3>
+              <p>$19,995</p>
+            </article>
+
+            <article class="card">
+              <img src="/images/cars/car2.jpg" alt="Red SUV 2020" />
+              <h3>2020 SUV</h3>
+              <p>$24,495</p>
+            </article>
+
+            <article class="card">
+              <img src="/images/cars/car3.jpg" alt="White Truck 2019" />
+              <h3>2019 Truck</h3>
+              <p>$27,000</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT SECTION -->
+      <section class="about">
+        <div class="container">
+          <h2>About CSE Motors</h2>
+          <p>At CSE Motors, we take pride in offering reliable vehicles and outstanding customer service. Our goal is to make car buying simple, transparent, and enjoyable.</p>
+        </div>
+      </section>
+
+      <!-- CONTACT SECTION -->
+      <section class="contact">
+        <div class="container">
+          <h2>Contact Us</h2>
+          <form action="#" method="post">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="email" name="email" placeholder="Your Email" required />
+            <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit" class="btn">Send Message</button>
+          </form>
         </div>
       </section>
     </main>

@@ -1,124 +1,51 @@
--- Assignment 2 — Task 1: six SQL statements
+-- Assignment 2 — Task 1: Six SQL statements
+-- Each statement should be executed independently in PostgreSQL.
 
--- 1) Insert a test account (Tony Stark). Defaults generate account_id and account_type.
+---------------------------------------------------------------
+-- 1) Insert a test account (Tony Stark)
+--    Defaults will generate account_id and account_type = 'Customer'
+---------------------------------------------------------------
 INSERT INTO account (account_firstname, account_lastname, account_email, account_password)
 VALUES ('Tony', 'Stark', 'tony@starkent.com', 'Iam1ronM@n');
 
+---------------------------------------------------------------
 -- 2) Promote Tony Stark to Admin
+---------------------------------------------------------------
 UPDATE account
 SET account_type = 'Admin'
 WHERE account_email = 'tony@starkent.com';
 
+---------------------------------------------------------------
 -- 3) Remove the Tony Stark test account
+---------------------------------------------------------------
 DELETE FROM account
 WHERE account_email = 'tony@starkent.com';
 
--- 4) Update the GM Hummer description (replace a phrase)
+---------------------------------------------------------------
+-- 4) Update the GM Hummer description
+--    Replace the phrase “small interiors” with “a huge interior”
+---------------------------------------------------------------
 UPDATE inventory
-SET inv_description = replace(inv_description, 'small interiors', 'a huge interior')
-WHERE inv_make = 'GM' AND inv_model = 'Hummer' AND inv_description LIKE '%small interiors%';
+SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interior')
+WHERE inv_make = 'GM'
+  AND inv_model = 'Hummer'
+  AND inv_description LIKE '%small interiors%';
 
--- 5) Show sport-classification vehicles (inner join)
+---------------------------------------------------------------
+-- 5) Show vehicles in the Sport classification (INNER JOIN)
+---------------------------------------------------------------
 SELECT i.inv_make,
-      -- Assignment 2 — Task 1: six SQL statements
-
-      -- 1) Insert a test account (Tony Stark). Defaults generate account_id and account_type.
-      INSERT INTO account (account_firstname, account_lastname, account_email, account_password)
-      VALUES ('Tony', 'Stark', 'tony@starkent.com', 'Iam1ronM@n');
-
-      -- 2) Promote Tony Stark to Admin
-      UPDATE account
-      SET account_type = 'Admin'
-      WHERE account_email = 'tony@starkent.com';
-
-      -- 3) Remove the Tony Stark test account
-      DELETE FROM account
-      WHERE account_email = 'tony@starkent.com';
-
-      -- 4) Update the GM Hummer description (replace a phrase)
-      UPDATE inventory
-      SET inv_description = replace(inv_description, 'small interiors', 'a huge interior')
-      WHERE inv_make = 'GM' AND inv_model = 'Hummer' AND inv_description LIKE '%small interiors%';
-
-      -- 5) Show sport-classification vehicles (inner join)
-      SELECT i.inv_make,
-            -- Assignment 2 — Task 1: six SQL statements
-
-            -- 1) Insert a test account (Tony Stark). Defaults generate account_id and account_type.
-            INSERT INTO account (account_firstname, account_lastname, account_email, account_password)
-            VALUES ('Tony', 'Stark', 'tony@starkent.com', 'Iam1ronM@n');
-
-            -- 2) Promote Tony Stark to Admin
-            UPDATE account
-            SET account_type = 'Admin'
-            WHERE account_email = 'tony@starkent.com';
-
-            -- 3) Remove the Tony Stark test account
-            DELETE FROM account
-            WHERE account_email = 'tony@starkent.com';
-
-            -- 4) Update the GM Hummer description (replace a phrase)
-            UPDATE inventory
-            SET inv_description = replace(inv_description, 'small interiors', 'a huge interior')
-            WHERE inv_make = 'GM' AND inv_model = 'Hummer' AND inv_description LIKE '%small interiors%';
-
-            -- 5) Show sport-classification vehicles (inner join)
-            SELECT i.inv_make,
-                   i.inv_model,
-                   c.classification_name
-            FROM inventory i
-            JOIN classification c ON i.classification_id = c.classification_id
-            WHERE c.classification_name = 'Sport';
-
-            -- 6) Fix image paths by inserting the '/vehicles' folder into image URLs
-            UPDATE inventory
-            SET inv_image = replace(inv_image, '/images/', '/images/vehicles/'),
-                inv_thumbnail = replace(inv_thumbnail, '/images/', '/images/vehicles/');
--- 4) Modify the "GM Hummer" description replacing 'small interiors' with 'a huge interior'
--- Use PostgreSQL replace() so we don't retype the whole description
-UPDATE inventory
-SET inv_description = replace(inv_description, 'small interiors', 'a huge interior')
-WHERE inv_make = 'GM' AND inv_model = 'Hummer' AND inv_description LIKE '%small interiors%';
-
--- 5) Inner join: select make and model from inventory and classification name for 'Sport' category
-SELECT i.inv_make, i.inv_model, c.classification_name
+       i.inv_model,
+       c.classification_name
 FROM inventory i
 INNER JOIN classification c
-  ON i.classification_id = c.classification_id
+        ON i.classification_id = c.classification_id
 WHERE c.classification_name = 'Sport';
 
--- 6) Update all inventory records to insert '/vehicles' into image paths: /images/ -> /images/vehicles/
+---------------------------------------------------------------
+-- 6) Fix image paths by inserting the '/vehicles' folder
+--    Example: '/images/ford.jpg' → '/images/vehicles/ford.jpg'
+---------------------------------------------------------------
 UPDATE inventory
-SET inv_image = replace(inv_image, '/images/', '/images/vehicles/'),
-    inv_thumbnail = replace(inv_thumbnail, '/images/', '/images/vehicles/');
--- Task 1: Six SQL statements for Assignment 2
--- 1) Insert Tony Stark (account_id and account_type handled by defaults)
-INSERT INTO account (account_firstname, account_lastname, account_email, account_password)
-VALUES ('Tony', 'Stark', 'tony@starkent.com', 'Iam1ronM@n');
-
--- 2) Modify Tony Stark to change account_type to 'Admin'
-UPDATE account
-SET account_type = 'Admin'
-WHERE account_email = 'tony@starkent.com';
-
--- 3) Delete the Tony Stark record
-DELETE FROM account
-WHERE account_email = 'tony@starkent.com';
-
--- 4) Modify the "GM Hummer" description replacing 'small interiors' with 'a huge interior'
--- Use PostgreSQL replace() so we don't retype the whole description
-UPDATE inventory
-SET inv_description = replace(inv_description, 'small interiors', 'a huge interior')
-WHERE inv_make = 'GM' AND inv_model = 'Hummer' AND inv_description LIKE '%small interiors%';
-
--- 5) Inner join: select make and model from inventory and classification name for 'Sport' category
-SELECT i.inv_make, i.inv_model, c.classification_name
-FROM inventory i
-INNER JOIN classification c
-  ON i.classification_id = c.classification_id
-WHERE c.classification_name = 'Sport';
-
--- 6) Update all inventory records to insert '/vehicles' into image paths: /images/ -> /images/vehicles/
-UPDATE inventory
-SET inv_image = replace(inv_image, '/images/', '/images/vehicles/'),
-    inv_thumbnail = replace(inv_thumbnail, '/images/', '/images/vehicles/');
+SET inv_image     = REPLACE(inv_image, '/images/', '/images/vehicles/'),
+    inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/');
