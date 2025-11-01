@@ -1,11 +1,6 @@
--- Database rebuild script for Assignment 2 (Task Two)
--- Creates a PostgreSQL type, three tables, and populates classification and inventory.
--- At the end we run the two update queries from Task 1 (4 and 6).
-
--- 1) Create a custom type for account_type
-DO $$ BEGIN
-    CREATE TYPE account_type AS ENUM ('Customer', 'Admin', 'Employee');
-EXCEPTION WHEN duplicate_object THEN null; END $$;
+-- Database rebuild script for Assignment 2
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
 
 -- 2) Create classification table
 CREATE TABLE IF NOT EXISTS classification (
@@ -45,8 +40,7 @@ ON CONFLICT (classification_name) DO NOTHING;
 INSERT INTO inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, classification_id) VALUES
   ('Ford', 'Mustang', 2019, 'A fast sports car with aggressive styling', '/images/ford-mustang.jpg', '/images/ford-mustang-thumb.jpg', (SELECT classification_id FROM classification WHERE classification_name='Sport')),
   ('Dodge', 'Viper', 2018, 'High performance sport vehicle', '/images/dodge-viper.jpg', '/images/dodge-viper-thumb.jpg', (SELECT classification_id FROM classification WHERE classification_name='Sport')),
-  ('GM', 'Hummer', 2005, 'Large off-road vehicle with small interiors and rugged build', '/images/gm-hummer.jpg', '/images/gm-hummer-thumb.jpg', (SELECT classification_id FROM classification WHERE classification_name='SUV'))
-ON CONFLICT DO NOTHING;
+  ('GM', 'Hummer', 2005, 'Large off-road vehicle with small interiors and rugged build', '/images/gm-hummer.jpg', '/images/gm-hummer-thumb.jpg', (SELECT classification_id FROM classification WHERE classification_name='SUV'));
 
 -- 7) Add the two Task 1 queries (4 and 6) at the end of the rebuild file
 -- (4) Replace 'small interiors' in GM Hummer description
@@ -54,7 +48,7 @@ UPDATE inventory
 SET inv_description = replace(inv_description, 'small interiors', 'a huge interior')
 WHERE inv_make = 'GM' AND inv_model = 'Hummer' AND inv_description LIKE '%small interiors%';
 
--- (6) Update image paths to include /vehicles/
 UPDATE inventory
 SET inv_image = replace(inv_image, '/images/', '/images/vehicles/'),
     inv_thumbnail = replace(inv_thumbnail, '/images/', '/images/vehicles/');
+-- End of file
