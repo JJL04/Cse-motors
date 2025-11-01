@@ -1,71 +1,44 @@
-<section class="hero">
-  <div class="hero-inner container">
-    <div class="hero-text">
-      <h2>Drive the future</h2>
-      <p>Quality pre-owned and new vehicles. Great service. Honest pricing.</p>
-      <a class="btn" href="#inventory">View Inventory</a>
-    </div>
-    <div class="hero-image">
-      <picture>
-        <source srcset="/images/banner-large.svg" media="(min-width: 700px)">
-        <img src="/images/banner.svg" alt="CSE Motors banner">
-      </picture>
-    </div>
-  </div>
-</section>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include partials/head %>
+  </head>
+  <body>
+    <% include partials/header %>
+    <% include partials/nav %>
 
-<section id="inventory" class="container inventory">
-  <h3>Featured Vehicles</h3>
-  <div class="grid">
-    <article class="card">
-      <img src="/images/car1.svg" alt="Car 1">
-      <h4>2018 Compact Sedan</h4>
-      <p>Reliable, efficient, and inspected.</p>
-    </article>
-    <article class="card">
-      <img src="/images/car2.svg" alt="Car 2">
-      <h4>2020 SUV</h4>
-      <p>Spacious and family friendly.</p>
-    </article>
-    <article class="card">
-      <img src="/images/car3.svg" alt="Car 3">
-      <h4>2019 Coupe</h4>
-      <p>Sporty handling and stylish design.</p>
-    </article>
-  </div>
-</section>
+    <main class="container">
+      <section class="hero">
+        <img src="/images/hero.jpg" alt="CSE Motors showroom" />
+        <div class="hero-text">
+          <h2>Your dream car awaits</h2>
+          <p>Explore our selection of quality vehicles today!</p>
+          <a href="#" class="btn">View Inventory</a>
+        </div>
+      </section>
 
-<section id="about" class="container about">
-  <h3>About CSE Motors</h3>
-  <p>Family-owned dealership providing quality vehicles and transparent service.</p>
-</section>
+      <section class="featured">
+        <h2>Featured Vehicles</h2>
+        <div class="grid">
+          <article>
+            <img src="/images/cars/car1.jpg" alt="Blue Sedan" />
+            <h3>2021 Sedan</h3>
+            <p>$19,995</p>
+          </article>
+          <article>
+            <img src="/images/cars/car2.jpg" alt="Red SUV" />
+            <h3>2020 SUV</h3>
+            <p>$24,495</p>
+          </article>
+          <article>
+            <img src="/images/cars/car3.jpg" alt="White Truck" />
+            <h3>2019 Truck</h3>
+            <p>$27,000</p>
+          </article>
+        </div>
+      </section>
+    </main>
 
-<section id="contact" class="container contact">
-  <h3>Contact Us</h3>
-  <% if(typeof errors !== 'undefined' && errors){ %>
-    <div class="errors" role="alert">
-      <ul>
-        <% errors.forEach(function(e){ %>
-          <li><%= e %></li>
-        <% }) %>
-      </ul>
-    </div>
-  <% } %>
-
-  <% if(typeof success !== 'undefined'){ %>
-    <div class="success" role="status"><%= success %></div>
-  <% } %>
-
-  <form action="/inquiry" method="post" novalidate>
-    <label for="name">Name</label>
-  <input id="name" name="name" type="text" value="<%= (typeof form !== 'undefined' && form.name) ? form.name : '' %>" required>
-
-    <label for="email">Email</label>
-  <input id="email" name="email" type="email" value="<%= (typeof form !== 'undefined' && form.email) ? form.email : '' %>" required>
-
-    <label for="message">Message</label>
-  <textarea id="message" name="message" required><%= (typeof form !== 'undefined' && form.message) ? form.message : '' %></textarea>
-
-    <button class="btn" type="submit">Send Inquiry</button>
-  </form>
-</section>
+    <% include partials/footer %>
+  </body>
+</html>
